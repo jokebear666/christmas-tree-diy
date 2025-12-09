@@ -1,60 +1,78 @@
 
+# 3D 互动圣诞树 🎄
 
-- 一个基于 React + Vite 的 3D 圣诞树 Web 应用，使用 React Three Fiber（Three.js）渲染高保真场景。
-- 支持 AI 手势识别（MediaPipe），用“张开手掌/握拳”在“散开 ↔ 聚合”之间切换；左右移动手掌控制视角旋转。
-- 照片来源可动态扫描本地资源，也可在页面中“上传多张图片”即时生成你的专属圣诞树。
-- 原创链接：https://github.com/moleculemmeng020425/christmas-tree#  本项目在此基础上进行修改
+一个基于 React + Vite 的交互式 3D 圣诞树 Web 应用，结合 AI 手势识别与个性化照片，打造专属的节日体验。
+
 ![Project Preview](public/preview.png)
-特性
 
-- 交互式 3D 场景：树叶粒子、双面拍立得、彩灯闪烁、圣诞元素与顶部金色五角星。
-- AI 手势控制：摄像头识别 Open Palm / Closed Fist / 手掌移动。
-- 自定义照片：
-  - 启动时自动扫描 src/assets/photos 中的图片（支持任意文件名，含 jpg/jpeg/png/webp ）。
-  - 页面右下角“上传照片”按钮支持多选上传，上传后“仅使用上传的照片”渲染。
-  - 文件名为 top.* （如 top.jpg / top.png ）的图片优先显示。
-- 参数面板（右上角“参数设置”）：可调整树叶粒子、照片挂件、圣诞元素与彩灯数量，实时生效。
-- 调试面板（右下角“🛠 DEBUG”）：查看摄像头画面与关键点覆盖，便于确认手势识别。
-技术栈
+## ✨ 特性
 
-- 前端框架：React 18、Vite
-- 3D 渲染：React Three Fiber（Three.js）
-- 3D 辅助： @react-three/drei 、 @react-three/postprocessing
-- AI 手势识别： @mediapipe/tasks-vision
-- 数学/粒子辅助： maath
-目录结构（关键）
+- **沉浸式 3D 场景**: 使用 React Three Fiber (Three.js) 渲染高保真场景，包含树叶粒子、双面拍立得、闪烁彩灯、圣诞装饰物与顶部金色五角星。
+- **AI 手势控制**: 集成 MediaPipe，通过摄像头识别手势进行交互。
+    - **张开手掌 / 握拳**: 在“散开 ↔ 聚合”状态间切换圣诞树。
+    - **左右/上下移动手掌**: 控制场景视角旋转与俯仰。
+- **个性化照片墙**:
+    - **自动扫描**: 启动时自动扫描 `src/assets/photos/` 目录下的图片 (支持 `.jpg`, `.jpeg`, `.png`, `.webp`)。
+    - **动态上传**: 通过页面右下角“上传照片”按钮，可多选上传图片即时生成专属圣诞树。上传后仅使用本次上传的照片。
+    - **顶部图片**: 文件名为 `top.*` (如 `top.jpg`) 的图片会被优先显示在顶部。
+- **实时参数调节**: 通过右上角“参数设置”面板，可动态调整树叶粒子、照片挂件、圣诞元素与彩灯的数量，更改实时生效。
+- **调试面板**: 点击右下角“🛠 DEBUG”按钮，可查看摄像头画面与手势关键点，便于调试识别效果。
 
-- src/App.tsx ：主场景、手势控制器、参数面板与上传逻辑
-- src/assets/photos/ ：默认内置照片扫描目录（支持任意文件名）
-- src/main.tsx 、 src/index.css 、 src/App.css ：入口与样式
-- public/ ：公共静态资源（例如 vite.svg ），不参与打包处理路径
-- vite.config.ts ：Vite 配置（GitHub Pages 需设置 base ）
-环境要求
+## 🛠 技术栈
 
-- Node.js ≥ 18（建议 18 或 20），自带 npm
-- 浏览器需支持 WebGL/WebAssembly 与摄像头权限（Chrome/Edge/Firefox/Safari）
-快速开始
+- **前端框架**: React 18, Vite
+- **3D 渲染**: React Three Fiber (Three.js)
+- **3D 工具库**: `@react-three/drei`, `@react-three/postprocessing`
+- **AI 手势识别**: `@mediapipe/tasks-vision`
+- **数学/粒子**: `maath`
 
-- 安装依赖： npm install
-- 开发启动： npm run dev
-- 构建产物： npm run build
-- 本地预览： npm run preview （用于模拟线上构建结果）
-使用说明
+## ⚙️ 环境要求
 
-- 手势控制：
-  - 张开手掌（Open Palm）→ Disperse（散开）：圣诞树炸裂为漫天粒子与照片
-  - 握紧拳头（Closed Fist）→ Assemble（聚合）：元素聚合为完整圣诞树
-  - 手掌左右移动 → 旋转视角：向左移树向左转，向右移树向右转
-  - 手掌上下移动 → 俯仰视角：向上移抬高视角，向下移降低视角
-- 上传照片：点击右下角“上传照片”多选图片（PC/手机相册均可），上传后仅用本次上传的照片生成圣诞树；支持 jpg/jpeg/png/webp 。
-- 参数面板（右上角“参数设置”）：
-  - 树叶粒子数量 ：树身密度；越大越华丽，性能压力越高
-  - 拍立得照片数量 ：照片挂件数量（不足时循环纹理）
-  - 圣诞元素数量 ：礼物盒、球、拐杖糖的总数
-  - 彩灯数量 ：闪烁的灯泡数量
-- 调试：点击“🛠 DEBUG”显示摄像头画面与关键点；若提示权限被拒绝，请在浏览器地址栏允许摄像头。
-自定义照片（启动时扫描）
+- **Node.js**: ≥ 18 (推荐 18 或 20)
+- **包管理器**: npm
+- **浏览器**: 支持 WebGL / WebAssembly 并允许摄像头访问 (Chrome, Edge, Firefox, Safari 等)
 
-### 📄 License
-MIT License. Feel free to use and modify for your own holiday celebrations!
-### Merry Christmas! 🎄✨
+## 🚀 快速开始
+
+1.  **克隆项目并安装依赖**
+    ```bash
+    npm install
+    ```
+
+2.  **启动开发服务器**
+    ```bash
+    npm run dev
+    ```
+
+## 📖 使用说明
+
+### 手势控制
+- **张开手掌 (Open Palm)**: 触发 `Disperse` (散开) 模式，圣诞树“炸裂”为漫天粒子与照片。
+- **握紧拳头 (Closed Fist)**: 触发 `Assemble` (聚合) 模式，所有元素聚合回完整的圣诞树形态。
+- **手掌左右移动**: 控制场景水平旋转。向左移动，树向左转；向右移动，树向右转。
+- **手掌上下移动**: 控制场景俯仰视角。向上移动，抬高视角；向下移动，降低视角。
+
+### 上传照片
+点击页面右下角的 **“上传照片”** 按钮，从本地或手机相册中多选图片 (支持 `.jpg`, `.jpeg`, `.png`, `.webp`)。上传成功后，圣诞树将仅使用本次上传的照片进行渲染。
+
+### 参数面板 (右上角“参数设置”)
+- **树叶粒子数量**: 控制树身的粒子密度。数值越大越华丽，但对性能要求越高。
+- **拍立得照片数量**: 设置照片挂件的数量。当照片数量不足时，纹理会循环使用。
+- **圣诞元素数量**: 设置礼物盒、彩球、拐杖糖等装饰物的总数。
+- **彩灯数量**: 设置闪烁的圣诞灯泡数量。
+
+### 调试
+点击右下角的 **“🛠 DEBUG”** 按钮，打开调试面板查看摄像头画面与手势关键点。如果首次使用提示权限被拒绝，请在浏览器地址栏弹出的提示中允许访问摄像头。
+
+### 自定义启动照片
+将你的图片放入 `src/assets/photos/` 目录下，应用启动时会自动扫描并加载。
+
+## 📄 许可证
+
+本项目基于 [MIT License](LICENSE) 开源。
+
+**致谢**: 本项目在 [moleculemmeng020425/christmas-tree](https://github.com/moleculemmeng020425/christmas-tree) 的基础上进行修改与扩展。
+
+---
+
+## 🎅 圣诞快乐！ 🎄✨
